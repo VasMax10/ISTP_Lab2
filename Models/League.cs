@@ -9,10 +9,11 @@ namespace ISTP_Lab2.Models
     {
         public League()
         {
-
+            Clubs = new List<Club>();
         }
         public int ID { get; set; }
         public string Name { get; set; }
         public string ImageUrl { get; set; }
+        public virtual ICollection<Club> Clubs { get; set; }
     }
 }

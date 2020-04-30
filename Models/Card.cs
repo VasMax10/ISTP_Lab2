@@ -25,5 +25,6 @@ namespace ISTP_Lab2.Models
         [Display(Name = "PHY")]
         public string Physical { get; set; }
         public virtual Player Player { get; set; }
+        public virtual CardType Type { get; set; }
     }
 }

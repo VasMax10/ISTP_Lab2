@@ -16,6 +16,8 @@ namespace ISTP_Lab2.Models
         public int NationID { get; set; }
         public string Name { get; set; }
         public string ImageUrl { get; set; }
+        public virtual Club Club { get; set; }
+        public virtual Nation Nation { get; set; }
         public virtual ICollection<Card> Cards { get; set; }
     }
 }
