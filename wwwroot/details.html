@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Lab2-FIFA database (Details)</title>
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+    <h1>Lab2-FIFA database</h1>
+    <h3>Add League</h3>
+    <form action="javascript:void(0);" method="POST" onsubmit="addLeague()">
+        <input type="text" id="add-name" placeholder="New League"/>
+        <input type="text" id="add-imageurl" placeholder="New ImageUrl League"/>
+        <input type="submit" value="Add"/>
+    </form>
+
+    <div class="modal" id="editLeague" style="display:none">
+        <div class="modal-content">
+            <h3>Change League Info</h3>
+            <form action="javascript:void(0);" onsubmit="updateLeague()">
+                <input type="hidden" id="edit-id" />
+                <a>
+
+                </a>
+                <input type="text" id="edit-name" />
+                <input type="text" id="edit-imageurl" />
+                <input type="submit" value="Save" />
+                <a style="cursor:pointer" onclick="closeInput()" aria-label="Close">&#10006;</a>
+            </form>
+        </div>
+    </div>
+
+    <p id="counter"></p>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>ImageUrl</th>
+        </tr>
+        <tbody id="leagues"></tbody>
+    </table>
+
+    <script src="js/lab2.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        getLeagues();
+    </script>
+
+</body>
+</html>
