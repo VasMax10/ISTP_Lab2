@@ -13,16 +13,22 @@ namespace ISTP_Lab2.Models
         public int TypeID { get; set; }
 
         [Display(Name = "PAC")]
+        [Required(ErrorMessage = "This field is required")]
         public string Pace { get; set; }
         [Display(Name = "SHO")]
+        [Required(ErrorMessage = "This field is required")]
         public string Shooting { get; set; }
         [Display(Name = "PAS")]
+        [Required(ErrorMessage = "This field is required")]
         public string Passing { get; set; }
         [Display(Name = "DRI")]
+        [Required(ErrorMessage = "This field is required")]
         public string Dribling { get; set; }
         [Display(Name = "DEF")]
+        [Required(ErrorMessage = "This field is required")]
         public string Defense { get; set; }
         [Display(Name = "PHY")]
+        [Required(ErrorMessage = "This field is required")]
         public string Physical { get; set; }
         public virtual Player Player { get; set; }
         public virtual CardType Type { get; set; }

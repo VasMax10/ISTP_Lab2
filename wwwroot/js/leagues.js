@@ -1,5 +1,7 @@
 ﻿const uri = 'api/Leagues';
 let leagues = [];
+var modal = document.getElementById("editLeague");
+
 
 function getLeagues() {
     fetch(uri)
@@ -43,6 +45,7 @@ function deleteLeague(id) {
 }
 
 function displayEditForm(id) {
+    modal = document.getElementById("editLeague");
     const league = leagues.find(league => league.id === id);
 
     document.getElementById('edit-id').value = league.id;
@@ -115,10 +118,21 @@ function _displayLeagues(data) {
     leagues = data;
 }
 
-var modal = document.getElementById("editLeague");
-
 window.onclick = function (event) {
+    
     if (event.target == modal) {
         modal.style.display = "none";
     }
+}
+
+function importLeagues() {
+    document.getElementById("testImport").value = document.getElementById('dataFile').value;
+
+    
+}
+
+
+function showImportMenu() {
+    document.getElementById('importLeagues').style.display = 'block';
+    modal = document.getElementById("importLeagues");
 }
