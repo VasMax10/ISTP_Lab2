@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Details</title>
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/boots/css/bootstrap.min.css">
+</head>
+<body class="back">
+    <nav class="navbar navbar-dark bg-primary" style="margin-left:-70px; margin-right:-70px">
+        <div align="left" class="EA-Font" style="font-size: 40px;">
+            <a>
+                Lab2-FIFA database
+            </a>
+        </div>
+        <ul class="navbar-nav list-group-horizontal">
+            <li class="nav-item EA-Font-small" style="margin-left:15px; margin-right:15px">
+                <a class="nav-link" href="leagues.html">Leagues</a>
+            </li>
+            <li class="nav-item EA-Font-small" style="margin-left:15px; margin-right:15px">
+                <a class="nav-link" href="#">Nations</a>
+            </li>
+        </ul>
+    </nav>
+    <br />
+
+    <div>
+        <a class="button EA-Font-small" style="width:100px" onclick="showAddMenu()" aria-label="Close">Add Club</a>
+        <a class="button EA-Font-small" style="width:120px" onclick="showImportMenu()" aria-label="Close">Import Data</a>
+        <a class="button EA-Font-small" style="width:120px" onclick="showChangeLeagueMenu()" aria-label="Close">Change League</a>
+    </div>
+    <div class="modal" id="addClub">
+        <div class="modal-content">
+            <h3>Add club</h3>
+            <form action="javascript:void(0);" method="POST" onsubmit="addClub()">
+                <input type="text" id="add-name" placeholder="New Club" />
+                <input type="text" id="add-imageurl" placeholder="New ImageUrl Club" />
+                <select id="leagues"></select>
+                <input type="submit" value="Add" />
+                <a style="cursor:pointer" onclick="closeInput()" aria-label="Close">&#10006;</a>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <select id="selectleague" onchange="getClubsByLeague()"
+                class="btn btn-light dropdown-toggle" style="width:60%"></select>
+        <a style="cursor:pointer" onclick="clearSelect()" aria-label="Close">&#10006;</a>
+    </div>
+
+    <div class="modal" id="importClubs">
+        <div class="modal-content">
+            <h3>Import Data</h3>
+            <form action="javascript:void(0);" method="POST" onsubmit="importClubs()">
+                <input type="file" id="dataFile" accept=".xlsx, .txt" />
+                <input type="text" id="testImport" />
+                <input type="submit" value="Import" />
+                <a style="cursor:pointer" onclick="closeInput()" aria-label="Close">&#10006;</a>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="editClub" style="display:none">
+        <div class="modal-content">
+            <h3>Change Club Info</h3>
+            <form action="javascript:void(0);" onsubmit="updateClub()">
+                <input type="hidden" id="edit-id" />
+                <input type="text" id="edit-name" />
+                <input type="text" id="edit-imageurl" />
+                <select id="edit-leagues"></select>
+                <input type="submit" value="Save" />
+                <a style="cursor:pointer" onclick="closeInput()" aria-label="Close">&#10006;</a>
+            </form>
+        </div>
+    </div>
+
+    <p id="counter"></p>
+    <table id="dataTable" class="table-data table-striped EA-Font-small"
+           style="margin-top: 40px">
+        <thead>
+            <tr>
+                <th style="width:90px"></th>
+                <th align="left" style="width:400px">Club</th>
+                <th align="left" style="width:400px">League</th>
+                <th align="right" style="width:20px"></th>
+                <th align="right" style="width:20px"></th>
+            </tr>
+        </thead>
+        <tbody id="clubs"></tbody>
+    </table>
+
+
+
+    <script src="js/clubs.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        getLeagues();
+        getClubs();
+    </script>
+
+
+
+</body>
+</html>

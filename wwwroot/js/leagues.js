@@ -80,6 +80,8 @@ function updateLeague() {
 
 function closeInput() {
     document.getElementById('editLeague').style.display = 'none';
+    document.getElementById('addLeague').style.display = 'none';
+    document.getElementById('importLeagues').style.display = 'none';
 }
 
 function _displayLeagues(data) {
@@ -88,25 +90,28 @@ function _displayLeagues(data) {
     tBody.innerHTML = '';
 
     const button = document.createElement('button');
-
+    
     data.forEach(league => {
         let editButton = button.cloneNode(false);
         editButton.innerText = 'Edit';
         editButton.setAttribute('onclick', `displayEditForm(${league.id})`);
+        //editButton.setAttribute('class', `btn-blue`);
 
         let deleteButton = button.cloneNode(false);
         deleteButton.innerText = 'Delete';
         deleteButton.setAttribute('onclick', `deleteLeague(${league.id})`);
 
         let tr = tBody.insertRow();
-
+        
         let td1 = tr.insertCell(0);
-        let textNode = document.createTextNode(league.name);
-        td1.appendChild(textNode);
+        var img = document.createElement('img');
+        img.src = "../images/leagues/league_large_" + league.imageUrl + ".png"
+        img.width = 70;
+        td1.appendChild(img);
 
         let td2 = tr.insertCell(1);
-        let textNodeImageUrl = document.createTextNode(league.imageUrl);
-        td2.appendChild(textNodeImageUrl);
+        let textNode = document.createTextNode(league.name);
+        td2.appendChild(textNode);
 
         let td3 = tr.insertCell(2);
         td3.appendChild(editButton);
@@ -119,20 +124,57 @@ function _displayLeagues(data) {
 }
 
 window.onclick = function (event) {
-    
+
     if (event.target == modal) {
         modal.style.display = "none";
     }
 }
 
 function importLeagues() {
-    document.getElementById("testImport").value = document.getElementById('dataFile').value;
+    let input = document.getElementById("dataFile");
 
-    
+    let files = input.files;
+    if (files.length == 0) return;
+
+    const file = files[0];
+
+    let reader = new FileReader();
+
+    reader.onload = (e) => {
+        const file = e.target.result;
+        var lines = file.split('\n');
+        for (var line = 0; line < lines.length; line++) {
+            var values = lines[line].split(';');
+            var league = {
+                name: values[0],
+                imageurl: values[1],
+            };
+            fetch(uri, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(league)
+            })
+                .then(response => response.json())
+                .then(() => {
+                    getLeagues();
+                })
+                .catch(error => console.error('Unable to add league', error));
+        }
+    };
+
+    reader.onerror = (e) => alert(e.target.error.name);
+
+    reader.readAsText(file);
 }
-
 
 function showImportMenu() {
     document.getElementById('importLeagues').style.display = 'block';
     modal = document.getElementById("importLeagues");
+}
+function showAddMenu() {
+    document.getElementById('addLeague').style.display = 'block';
+    modal = document.getElementById("addLeague");
 }

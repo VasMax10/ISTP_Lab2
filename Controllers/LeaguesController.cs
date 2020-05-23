@@ -6,6 +6,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ISTP_Lab2.Models;
+using System.IO;
+using ClosedXML.Excel;
+using System.Diagnostics;
+using System.Net;
+using System.Net.Http;
+using System.Web;
 
 namespace ISTP_Lab2.Controllers
 {
@@ -105,5 +111,42 @@ namespace ISTP_Lab2.Controllers
         {
             return _context.Leagues.Any(e => e.ID == id);
         }
+        /*[HttpPost]
+        public async Task<ActionResult<IEnumerable<League>>> UploadFiles(IFormFile file)
+        {
+            if (ModelState.IsValid)
+            {
+                if (file != null)
+                {
+                    using (var stream = new FileStream(file.FileName, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                        using (XLWorkbook workBook = new XLWorkbook(stream, XLEventTracking.Disabled))
+                        {
+                            // перегляд листів (в даному випадку версій)
+                            foreach (IXLWorksheet worksheet in workBook.Worksheets)
+                            {
+
+                                // перегляд рядків
+                                foreach (IXLRow row in worksheet.RowsUsed().Skip(1))
+                                {
+                                    try
+                                    {
+                                        League league = new League();
+                                        league.Name = row.Cell(1).Value.ToString();
+                                        league.ImageUrl = row.Cell(2).Value.ToString();
+                                        _context.Leagues.Add(league);
+                                    }
+                                    catch { }
+                                }
+                            }
+                        }
+                    }
+                }
+                await _context.SaveChangesAsync();
+            }
+            return CreatedAtAction("GetLeague", _context.Leagues.FirstOrDefault());
+        }
+        */
     }
 }

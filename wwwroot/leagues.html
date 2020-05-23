@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Details</title>
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/boots/css/bootstrap.min.css">
+</head>
+<body class="back">
+    <div align="center" class="EA-Font" style="font-size: 40px;">
+        <a>
+            Lab2-FIFA database
+        </a>
+    </div>
+    <br />
+
+    <div>
+        <a class="button EA-Font-small" style="width:100px" onclick="showAddMenu()" aria-label="Close">Add League</a>
+        <a class="button EA-Font-small" style="width:120px" onclick="showImportMenu()" aria-label="Close">Import Data</a>
+    </div>
+    <div class="modal" id="addLeague">
+        <div class="modal-content">
+            <h3>Add league</h3>
+            <form action="javascript:void(0);" method="POST" onsubmit="addLeague()">
+                <input type="text" id="add-name" placeholder="New League" />
+                <input type="text" id="add-imageurl" placeholder="New ImageUrl League" />
+                <input type="submit" value="Add" />
+                <a style="cursor:pointer" onclick="closeInput()" aria-label="Close">&#10006;</a>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="importLeagues">
+        <div class="modal-content">
+            <h3>Import Data</h3>
+            <form action="javascript:void(0);" method="POST" onsubmit="importLeagues()">
+                <input type="file" id="dataFile" accept=".xlsx, .txt" />
+                <input type="text" id="testImport" />
+                <input type="submit" value="Import" />
+                <a style="cursor:pointer" onclick="closeInput()" aria-label="Close">&#10006;</a>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="editLeague" style="display:none">
+        <div class="modal-content">
+            <h3>Change League Info</h3>
+            <form action="javascript:void(0);" onsubmit="updateLeague()">
+                <input type="hidden" id="edit-id" />
+                <input type="text" id="edit-name" />
+                <input type="text" id="edit-imageurl" />
+                <input type="submit" value="Save" />
+                <a style="cursor:pointer" onclick="closeInput()" aria-label="Close">&#10006;</a>
+            </form>
+        </div>
+    </div>
+
+    <p id="counter"></p>
+
+    <table id="dataTable" class="table-data EA-Font-small"
+           style="margin-top: 40px">
+        <tr>
+            <th style="width:90px"></th>
+            <th align="left" style="width:400px">League</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tbody id="leagues"></tbody>
+    </table>
+
+    <script src="js/leagues.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        getLeagues();
+    </script>
+
+
+
+</body>
+</html>
