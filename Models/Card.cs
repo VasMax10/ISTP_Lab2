@@ -11,6 +11,10 @@ namespace ISTP_Lab2.Models
         public int ID { get; set; }
         public int PlayerID { get; set; }
         public int TypeID { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        public int Rating { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        public string Position { get; set; }
 
         [Display(Name = "PAC")]
         [Required(ErrorMessage = "This field is required")]
@@ -30,6 +34,7 @@ namespace ISTP_Lab2.Models
         [Display(Name = "PHY")]
         [Required(ErrorMessage = "This field is required")]
         public string Physical { get; set; }
+        public string SpecialImageUrl { get; set; }
         public virtual Player Player { get; set; }
         public virtual CardType Type { get; set; }
     }

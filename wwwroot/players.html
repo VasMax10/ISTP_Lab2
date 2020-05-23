@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Details</title>
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/boots/css/bootstrap.min.css">
+</head>
+<body class="back">
+    <nav class="navbar navbar-dark bg-primary" style="margin-left:-70px; margin-right:-70px">
+        <ul class="navbar-nav list-group-horizontal">
+            <li class="nav-item EA-Font-small" style="margin-left:15px; margin-right:40px; font-size: 25px;">
+                <a class="nav-link" href="index.html">FIFA DATABASE</a>
+            </li>
+            <li class="nav-item EA-Font-small" style="margin-left:15px; margin-right:15px">
+                <a class="nav-link" href="leagues.html">Leagues</a>
+            </li>
+            <li class="nav-item EA-Font-small" style="margin-left:15px; margin-right:15px">
+                <a class="nav-link" href="nations.html">Nations</a>
+            </li>
+            <li class="nav-item EA-Font-small" style="        margin-left: 15px;
+        margin-right: 15px">
+                <a class="nav-link" href="cardTypes.html">Card Types</a>
+            </li>
+        </ul>
+    </nav>
+    <br />
+
+    <div>
+        <a class="button EA-Font-small" style="width:100px" onclick="showAddMenu()" aria-label="Close">Add Player</a>
+        <a class="button EA-Font-small" style="width:120px" onclick="showImportMenu()" aria-label="Close">Import Data</a>
+        <a class="button EA-Font-small" style="width:120px" onclick="showChangeClubMenu()" aria-label="Close">Change Club</a>
+    </div>
+    <div class="modal" id="addPlayer">
+        <div class="modal-content" style="width:70%">
+            <h3 align="center">Add player</h3>
+            <a style="cursor:pointer; margin-top:-50px; margin-left:98%" onclick="closeInput()" aria-label="Close">&#10006;</a>
+            <form style="margin-top:20px" action="javascript:void(0);" method="POST" onsubmit="addPlayer()">
+                <table>
+                    <tr>
+                        <td>Name</td>
+                        <td><input type="text" id="add-name" placeholder="New Player" /></td>
+                    </tr>
+                    <tr>
+                        <td>ImageUrl</td>
+                        <td><input type="text" id="add-imageurl" placeholder="ImageUrl" /></td>
+                    </tr>
+                    <tr>
+                        <td>Club</td>
+                        <td><select id="clubs"></select></td>
+                    </tr>
+                    <tr>
+                        <td>Nation</td>
+                        <td><select id="add-nations"></select></td>
+                    </tr>
+                </table>
+                <input type="submit" value="Add" />
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="changeClub" style="display:none">
+        <div class="modal-content" style="width:70%">
+            <select id="selectclub" class="btn btn-light dropdown-toggle"
+                    style="width:60%"></select>
+            <a style="cursor:pointer" onclick="changeClub()" aria-label="Close">OK</a>
+            <a style="cursor:pointer" onclick="closeInput()" aria-label="Close">&#10006;</a>
+        </div>
+    </div>
+
+    <div class="modal" id="importPlayers" style="display:none">
+        <div class="modal-content" style="width:70%">
+            <h3>Import Data</h3>
+            <form action="javascript:void(0);" method="POST" onsubmit="importPlayers()">
+                <input type="file" id="dataFile" accept=".xlsx, .txt" />
+                <input type="submit" value="Import" />
+                <a style="cursor:pointer" onclick="closeInput()" aria-label="Close">&#10006;</a>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="editPlayer" style="display:none">
+        <div class="modal-content" style="width:70%">
+            <h3 align="center">Change Player Info</h3>
+            <a style="cursor:pointer; margin-top:-50px; margin-left:98%" onclick="closeInput()" aria-label="Close">&#10006;</a>
+            <form style="margin-top:20px" action="javascript:void(0);" onsubmit="updatePlayer()">
+                <input type="hidden" id="edit-id" />
+                <table>
+                    <tr>
+                        <td>Name</td>
+                        <td><input type="text" id="edit-name" placeholder="Name" /></td>
+                    </tr>
+                    <tr>
+                        <td>ImageUrl</td>
+                        <td><input type="text" id="edit-imageurl" placeholder="ImageUrl" /></td>
+                    </tr>
+                    <tr>
+                        <td>Club</td>
+                        <td><select id="edit-clubs"></select></td>
+                    </tr>
+                    <tr>
+                        <td>Nation</td>
+                        <td><select id="edit-nations"></select></td>
+                    </tr>
+                </table>
+                <input type="submit" value="Save" />
+            </form>
+        </div>
+    </div>
+
+    <p id="counter"></p>
+    <table id="dataTable" class="table-data table-striped EA-Font-small"
+           style="margin-top: 40px">
+        <thead>
+            <tr>
+                <th style="width:90px"></th>
+                <th align="left" style="width:400px">Player</th>
+                <th align="left" style="width:400px">Club</th>
+                <th align="left" style="width:400px">Nation</th>
+                <th align="right" style="width:20px"></th>
+                <th align="right" style="width:20px"></th>
+            </tr>
+        </thead>
+        <tbody id="players"></tbody>
+    </table>
+
+
+
+    <script src="js/players.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        processUser();
+        getClubs();
+        getNations();
+        getPlayers();
+    </script>
+
+
+</body>
+</html>

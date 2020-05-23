@@ -24,28 +24,29 @@
             </li>
         </ul>
     </nav>
+
     <br />
 
     <div>
-        <a class="button EA-Font-small" style="width:100px" onclick="showAddMenu()" aria-label="Close">Add League</a>
+        <a class="button EA-Font-small" style="width:100px" onclick="showAddMenu()" aria-label="Close">Add CardType</a>
         <a class="button EA-Font-small" style="width:120px" onclick="showImportMenu()" aria-label="Close">Import Data</a>
     </div>
-    <div class="modal" id="addLeague">
+    <div class="modal" id="addCardType">
         <div class="modal-content">
-            <h3>Add league</h3>
-            <form action="javascript:void(0);" method="POST" onsubmit="addLeague()">
-                <input type="text" id="add-name" placeholder="New League" />
-                <input type="text" id="add-imageurl" placeholder="New ImageUrl League" />
+            <h3>Add cardType</h3>
+            <form action="javascript:void(0);" method="POST" onsubmit="addCardType()">
+                <input type="text" id="add-name" placeholder="New CardType" />
+                <input type="text" id="add-imageurl" placeholder="New ImageUrl CardType" />
                 <input type="submit" value="Add" />
                 <a style="cursor:pointer" onclick="closeInput()" aria-label="Close">&#10006;</a>
             </form>
         </div>
     </div>
 
-    <div class="modal" id="importLeagues">
+    <div class="modal" id="importCardTypes">
         <div class="modal-content">
             <h3>Import Data</h3>
-            <form action="javascript:void(0);" method="POST" onsubmit="importLeagues()">
+            <form action="javascript:void(0);" method="POST" onsubmit="importCardTypes()">
                 <input type="file" id="dataFile" accept=".xlsx, .txt" />
                 <input type="text" id="testImport" />
                 <input type="submit" value="Import" />
@@ -54,10 +55,10 @@
         </div>
     </div>
 
-    <div class="modal" id="editLeague" style="display:none">
+    <div class="modal" id="editCardType" style="display:none">
         <div class="modal-content">
-            <h3>Change League Info</h3>
-            <form action="javascript:void(0);" onsubmit="updateLeague()">
+            <h3>Change CardType Info</h3>
+            <form action="javascript:void(0);" onsubmit="updateCardType()">
                 <input type="hidden" id="edit-id" />
                 <input type="text" id="edit-name" />
                 <input type="text" id="edit-imageurl" />
@@ -69,22 +70,20 @@
 
     <p id="counter"></p>
 
-    <table id="dataTable" class="table-data EA-Font-small"
+    <table id="dataTable" class="table-data table-striped EA-Font-small"
            style="margin-top: 40px">
         <tr>
             <th style="width:90px"></th>
-            <th align="left" style="width:400px">League</th>
-            <th align="left" style="width:400px">Clubs</th>
-            <th align="right" style="width:30px"></th>
-            <th align="right" style="width:30px"></th>
-            <th align="right" style="width:30px; padding-right:40px"></th>
+            <th align="left" style="width:400px">CardType</th>
+            <th></th>
+            <th></th>
         </tr>
-        <tbody id="leagues"></tbody>
+        <tbody id="cardTypes"></tbody>
     </table>
 
-    <script src="js/leagues.js" asp-append-version="true"></script>
+    <script src="js/cardTypes.js" asp-append-version="true"></script>
     <script type="text/javascript">
-        getLeagues();
+        getCardTypes();
     </script>
 
 

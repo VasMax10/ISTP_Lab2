@@ -26,11 +26,23 @@ namespace ISTP_Lab2.Controllers
             _context = context;
         }
 
+        public class UserLeague : League
+        {
+            public int CountClubs { get; set; }
+            public UserLeague(League league, int countClubs)
+            {
+                CountClubs = countClubs;
+                ID = league.ID;
+                ImageUrl = league.ImageUrl;
+                Name = league.Name;
+            }
+        }
         // GET: api/Leagues
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<League>>> GetLeagues()
+        public async Task<ActionResult<IEnumerable<UserLeague>>> GetLeagues()
         {
-            return await _context.Leagues.ToListAsync();
+            var list = _context.Leagues.Select(c => new UserLeague(c, c.Clubs.Count));
+            return await list.ToListAsync();
         }
 
         // GET: api/Leagues/5

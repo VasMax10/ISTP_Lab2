@@ -19,12 +19,45 @@ namespace ISTP_Lab2.Controllers
         {
             _context = context;
         }
-
+        public class UserPlayer : Player
+        {
+            public string ClubName { get; set; }
+            public string NationName { get; set; }
+            public UserPlayer(Player player, string ClubName, string NationName)
+            {
+                ID = player.ID;
+                ImageUrl = player.ImageUrl;
+                Name = player.Name;
+                this.ClubName = ClubName;
+                this.NationName = NationName;
+            }
+        }
         // GET: api/Players
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Player>>> GetPlayers()
+        public async Task<ActionResult<IEnumerable<UserPlayer>>> GetPlayers(string clubName, string nationName)
         {
-            return await _context.Players.ToListAsync();
+            //return await _context.Players.ToListAsync();
+            var list = _context.Players.Select(c => new UserPlayer(c, c.Club.Name, c.Nation.Name));
+            if (clubName != null)
+            {
+                //list = list.Where(l => l.ClubName == clubName);
+                list = list.Where(l => l.Club.Name == clubName);
+            }
+            if (nationName != null)
+            {
+                list = list.Where(l => l.Nation.Name == nationName);
+
+            }
+
+            var list2 = _context.Players.Select(c => new UserPlayer(c, c.Club.Name, c.Nation.Name));
+            
+            /*if (leagueName != null)
+            {
+                var list2 = _context.Clubs.Where(c => c.League.Name == leagueName)
+                    .Select(c => new UserClub(c, c.League.Name));
+                return await list2.ToListAsync();
+            }*/
+            return await list.ToListAsync();
         }
 
         // GET: api/Players/5
@@ -45,8 +78,13 @@ namespace ISTP_Lab2.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPlayer(int id, Player player)
+        public async Task<IActionResult> PutPlayer(int id, Player player, string clubName, string nationName)
         {
+            var club = _context.Clubs.Where(l => l.Name == clubName).FirstOrDefault();
+            var nation = _context.Nations.Where(l => l.Name == nationName).FirstOrDefault();
+            player.ClubID = club.ID;
+            player.NationID = nation.ID;
+
             if (id != player.ID)
             {
                 return BadRequest();
@@ -77,12 +115,32 @@ namespace ISTP_Lab2.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Player>> PostPlayer(Player player)
+        public async Task<ActionResult<Player>> PostPlayer(string[] data)
         {
-            _context.Players.Add(player);
-            await _context.SaveChangesAsync();
-
+            Club club = _context.Clubs.Where(c => c.Name == data[1]).FirstOrDefault();
+            Nation nation = _context.Nations.Where(n => n.Name == data[2]).FirstOrDefault();
+            Player player = new Player
+            {
+                Name = data[0],
+                ClubID = club.ID,
+                NationID = nation.ID,
+                ImageUrl = data[3]
+            };
+            player.Nation = nation;
+            player.Club = club;
+            nation.Players.Add(player);
+            club.Players.Add(player);
+            if (ModelState.IsValid)
+            {
+                _context.Add(player);
+                await _context.SaveChangesAsync();
+            }
             return CreatedAtAction("GetPlayer", new { id = player.ID }, player);
+
+            //_context.Players.Add(player);
+            //await _context.SaveChangesAsync();
+
+            //return CreatedAtAction("GetPlayer", new { id = player.ID }, player);
         }
 
         // DELETE: api/Players/5

@@ -105,22 +105,27 @@ namespace ISTP_Lab2.Controllers
         [HttpPost]
         public async Task<ActionResult<Club>> PostClub(string[] data)
         {
-            League league = _context.Leagues.Where(l => l.Name == data[2]).Include(l => l.Clubs).FirstOrDefault();
-            Club club = new Club
+            Club check = _context.Clubs.Where(c => c.Name == data[0]).FirstOrDefault();
+            if (check == null)
             {
-                Name = data[0],
-                ImageUrl = data[1],
-                LeagueID = league.ID
-            };
-            club.League = league;
-            league.Clubs.Add(club);
-            if (ModelState.IsValid)
-            {
-                _context.Add(club);
-                await _context.SaveChangesAsync();
+                League league = _context.Leagues.Where(l => l.Name == data[2]).Include(l => l.Clubs).FirstOrDefault();
+                Club club = new Club
+                {
+                    Name = data[0],
+                    ImageUrl = data[1],
+                    LeagueID = league.ID
+                };
+                club.League = league;
+                league.Clubs.Add(club);
+                if (ModelState.IsValid)
+                {
+                    _context.Add(club);
+                    await _context.SaveChangesAsync();
+                }
+                return CreatedAtAction("GetClub", new { id = club.ID }, club);
             }
-
-            return CreatedAtAction("GetClub", new { id = club.ID }, club);
+            return BadRequest();
+            
         }
 
         // DELETE: api/Leagues/5

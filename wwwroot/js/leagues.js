@@ -92,6 +92,10 @@ function _displayLeagues(data) {
     const button = document.createElement('button');
     
     data.forEach(league => {
+        let detButton = button.cloneNode(false);
+        detButton.innerText = 'Clubs';
+        detButton.setAttribute('onclick', `ToClubs(${league.id})`);
+
         let editButton = button.cloneNode(false);
         editButton.innerText = 'Edit';
         editButton.setAttribute('onclick', `displayEditForm(${league.id})`);
@@ -114,10 +118,17 @@ function _displayLeagues(data) {
         td2.appendChild(textNode);
 
         let td3 = tr.insertCell(2);
-        td3.appendChild(editButton);
+        let textNodeCount = document.createTextNode(league.countClubs);
+        td3.appendChild(textNodeCount);
 
         let td4 = tr.insertCell(3);
-        td4.appendChild(deleteButton);
+        td4.appendChild(detButton);
+
+        let td5 = tr.insertCell(4);
+        td5.appendChild(editButton);
+
+        let td6 = tr.insertCell(5);
+        td6.appendChild(deleteButton);
     });
 
     leagues = data;
@@ -177,4 +188,9 @@ function showImportMenu() {
 function showAddMenu() {
     document.getElementById('addLeague').style.display = 'block';
     modal = document.getElementById("addLeague");
+}
+
+function ToClubs(id) {
+    const league = leagues.find(league => league.id === id);
+    window.location.href = `clubs.html?league=${league.name}`;
 }

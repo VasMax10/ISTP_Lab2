@@ -2,26 +2,14 @@
 let clubs = [];
 let leagues = [];
 var modal = document.getElementById("editClub");
+let cur_league = '';
 
 
 function getClubs() {
-    fetch(uri)
+    fetch(uri + `?leaguename=${cur_league}`)
         .then(response => response.json())
         .then(data => _displayClubs(data))
         .catch(error => console.error('Unable to get clubs.', error));
-}
-
-function getClubsByLeague() {
-    var leagueName = document.getElementById('selectleague').value;
-    fetch(uri + `?leaguename=${leagueName}`)
-        .then(response => response.json())
-        .then(data => _displayClubs(data))
-        .catch(error => console.error('Unable to get clubs.', error));
-}
-
-function clearSelect() {
-    document.getElementById('selectleague').value = '';
-    getClubs();
 }
 
 function getLeagues() {
@@ -56,12 +44,6 @@ function addClub() {
     const LeagueName = document.getElementById('leagues').value;
     
     let arr = [addNameTextbox.value.trim(), addImageUrlTextbox.value.trim(), LeagueName];
-    const club = {
-        name: addNameTextbox.value.trim(),
-        imageurl: addImageUrlTextbox.value.trim(),
-        leaguename: LeagueName.trim(),
-        leagueid: LeagueName.trim(),
-    };
 
     fetch(uri, {
         method: 'POST',
@@ -128,6 +110,7 @@ function closeInput() {
     document.getElementById('editClub').style.display = 'none';
     document.getElementById('addClub').style.display = 'none';
     document.getElementById('importClubs').style.display = 'none';
+    document.getElementById('changeLeague').style.display = 'none';
 }
 
 function _displayClubs(data) {
@@ -226,4 +209,24 @@ function showImportMenu() {
 function showAddMenu() {
     document.getElementById('addClub').style.display = 'block';
     modal = document.getElementById("addClub");
+}
+
+function showChangeLeagueMenu() {
+    document.getElementById('changeLeague').style.display = 'block';
+    modal = document.getElementById("changeLeague");
+}
+
+function changeLeague() {
+    cur_league = document.getElementById("selectleague").value;
+    getClubs();
+    closeInput();
+}
+
+function processUser() {
+    var parameters = location.search.substring(1).split("&");
+
+    var temp = parameters[0].split("=");
+    if (temp[0] == 'league')
+        cur_league = temp[1];
+    parameters = '';
 }
