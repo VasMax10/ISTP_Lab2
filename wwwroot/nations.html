@@ -2,12 +2,12 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Details</title>
+    <title>Nations</title>
     <link rel="stylesheet" href="css/site.css">
     <link rel="stylesheet" href="css/boots/css/bootstrap.min.css">
 </head>
 <body class="back">
-    <nav class="navbar navbar-dark bg-primary" style="margin-left:-70px; margin-right:-70px">
+    <nav class="navbar navbar-dark bg-dark" style="margin-left:-70px; margin-right:-70px">
         <ul class="navbar-nav list-group-horizontal">
             <li class="nav-item EA-Font-small" style="margin-left:15px; margin-right:40px; font-size: 25px;">
                 <a class="nav-link" href="index.html">FIFA DATABASE</a>
@@ -32,7 +32,7 @@
         <a class="button EA-Font-small" style="width:120px" onclick="showImportMenu()" aria-label="Close">Import Data</a>
     </div>
     <div class="modal" id="addNation">
-        <div class="modal-content">
+        <div class="modal-content" style="width:60%">
             <h3>Add nation</h3>
             <form action="javascript:void(0);" method="POST" onsubmit="addNation()">
                 <input type="text" id="add-name" placeholder="New Nation" />
@@ -44,7 +44,7 @@
     </div>
 
     <div class="modal" id="importNations">
-        <div class="modal-content">
+        <div class="modal-content" style="width:60%">
             <h3>Import Data</h3>
             <form action="javascript:void(0);" method="POST" onsubmit="importNations()">
                 <input type="file" id="dataFile" accept=".xlsx, .txt" />
@@ -56,7 +56,7 @@
     </div>
 
     <div class="modal" id="editNation" style="display:none">
-        <div class="modal-content">
+        <div class="modal-content" style="width:60%">
             <h3>Change Nation Info</h3>
             <form action="javascript:void(0);" onsubmit="updateNation()">
                 <input type="hidden" id="edit-id" />
@@ -76,8 +76,9 @@
             <tr>
                 <th style="width:90px"></th>
                 <th align="left" style="width:400px">Nation</th>
-                <th></th>
-                <th></th>
+                <th align="right" style="width:10px"></th>
+                <th align="right" style="width:10px"></th>
+                <th align="right" style="width:10px"></th>
             </tr>
         </thead>
         <tbody id="nations"></tbody>

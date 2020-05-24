@@ -141,7 +141,7 @@ function _displayPlayers(data) {
         var img = document.createElement('img');
         //img.src = "../images/players/player_large_" + player.imageUrl + ".png"
         img.src = player.imageUrl;
-        img.width = 70;
+        img.width = 100;
         td1.appendChild(img);
 
         let td2 = tr.insertCell(1);
@@ -217,11 +217,11 @@ function showImportMenu() {
 }
 function showAddMenu() {
     document.getElementById('addPlayer').style.display = 'block';
+    modal = document.getElementById("addPlayer");
     if (cur_club != '')
         document.getElementById('add-club-div').style.display = 'none';
     if (cur_nation != '')
         document.getElementById('add-nation-div').style.display = 'none';
-    modal = document.getElementById("addPlayer");
 }
 
 function showChangeClubMenu() {
@@ -283,4 +283,8 @@ function _displayNations(data) {
     });
 
     nations = data;
+}
+
+function cardsMode() {
+    window.location.href = `cards.html?club=${cur_club}`;
 }

@@ -95,22 +95,25 @@ function _displayLeagues(data) {
         let detButton = button.cloneNode(false);
         detButton.innerText = 'Clubs';
         detButton.setAttribute('onclick', `ToClubs(${league.id})`);
+        detButton.setAttribute('class', 'rounded');
 
         let editButton = button.cloneNode(false);
         editButton.innerText = 'Edit';
         editButton.setAttribute('onclick', `displayEditForm(${league.id})`);
+        editButton.setAttribute('class', 'btn-primary rounded');
         //editButton.setAttribute('class', `btn-blue`);
 
         let deleteButton = button.cloneNode(false);
         deleteButton.innerText = 'Delete';
         deleteButton.setAttribute('onclick', `deleteLeague(${league.id})`);
+        deleteButton.setAttribute('class', 'btn-danger rounded');
 
         let tr = tBody.insertRow();
         
         let td1 = tr.insertCell(0);
         var img = document.createElement('img');
         img.src = "../images/leagues/league_large_" + league.imageUrl + ".png"
-        img.width = 70;
+        img.width = 100;
         td1.appendChild(img);
 
         let td2 = tr.insertCell(1);

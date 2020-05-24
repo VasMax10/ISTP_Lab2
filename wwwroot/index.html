@@ -3,44 +3,33 @@
 <head>
     <meta charset="utf-8" />
     <title>Main page</title>
-    <link rel="stylesheet" href="css/site.css" >
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/boots/css/bootstrap.min.css">
 </head>
 <body class="back">
-    <table width="100%" height="800px" border="1" class="EA-Font">
-        <tr>
-            <td id="league" align="center"
-                style="background-image:url('images/backgrounds/collections_button_bw_leagues.png')"
-                onmouseover="onLeague()" onmouseout="leftLeague()">
-                <a class="EA-Font" href="leagues.html">
-                    <div style="height:100%; width:100%">
-                        Leagues
-                    </div>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td id="nation" align="center"
-                style="background-image:url('images/backgrounds/collections_button_bw_nations.png')"
-                onmouseover="onNation()" onmouseout="leftNation()">
-                <a class="EA-Font" href="nations.html">
-                    <div style="height:100%; width:100%">
-                        Nations
-                    </div>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td id="card" align="center"
-                style="background-image:url('images/backgrounds/collections_button_bw_cards.png')"
-                onmouseover="onCard()" onmouseout="leftCard()">
-                <a class="EA-Font" href="cardTypes.html">
-                    <div style="height:100%; width:100%">
-                        Cards
-                    </div>
-                </a>
-            </td>
-        </tr>
-    </table>
+    <nav class="navbar navbar-dark bg-dark" style="margin-left:-70px; margin-right:-70px">
+        <ul class="navbar-nav list-group-horizontal">
+            <li class="nav-item EA-Font-small" style="margin-left:15px; margin-right:40px; font-size: 25px;">
+                <a class="nav-link" href="index.html">FIFA DATABASE</a>
+            </li>
+            <li class="nav-item EA-Font-small" style="margin-left:15px; margin-right:15px">
+                <a class="nav-link" href="leagues.html">Leagues</a>
+            </li>
+            <li class="nav-item EA-Font-small" style="margin-left:15px; margin-right:15px">
+                <a class="nav-link" href="nations.html">Nations</a>
+            </li>
+            <li class="nav-item EA-Font-small" style="        margin-left: 15px;
+        margin-right: 15px">
+                <a class="nav-link" href="cardTypes.html">Card Types</a>
+            </li>
+        </ul>
+    </nav>
+    <br />
+    <br />
+    <br />
+    <h1 class="EA-Font" align="center">Welcome</h1>
+    <h2 class="EA-Font" align="center">It &nbsp;&nbsp;&nbsp;is &nbsp;&nbsp;&nbsp;your &nbsp;&nbsp;&nbsp;FIFA &nbsp;&nbsp;&nbsp;20 &nbsp;&nbsp;&nbsp;Ultimate &nbsp;&nbsp;&nbsp;Team &nbsp;&nbsp;&nbsp;Database</h2>
+
     <script src="js/index.js" asp-append-version="true"></script>
 
 </body>

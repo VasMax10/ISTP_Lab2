@@ -2,12 +2,12 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Details</title>
+    <title>Cards</title>
     <link rel="stylesheet" href="css/site.css">
     <link rel="stylesheet" href="css/boots/css/bootstrap.min.css">
 </head>
 <body class="back">
-    <nav class="navbar navbar-dark bg-primary" style="margin-left:-70px; margin-right:-70px">
+    <nav class="navbar navbar-dark bg-dark" style="margin-left:-70px; margin-right:-70px">
         <ul class="navbar-nav list-group-horizontal">
             <li class="nav-item EA-Font-small" style="margin-left:15px; margin-right:40px; font-size: 25px;">
                 <a class="nav-link" href="index.html">FIFA DATABASE</a>
@@ -28,8 +28,9 @@
     <div>
         <a class="button EA-Font-small" style="width:100px" onclick="showAddMenu()" aria-label="Close">Add Card</a>
         <a class="button EA-Font-small" style="width:120px" onclick="showImportMenu()" aria-label="Close">Import Data</a>
-        <a class="button EA-Font-small" style="width:120px" onclick="showChangePlayerMenu()" aria-label="Close">Change Player</a>
-        <a class="button EA-Font-small" style="width:120px" onclick="showChangeTypeMenu()" aria-label="Close">Change Type</a>
+        <!--<a class="button EA-Font-small" style="width:120px" onclick="showChangeClubMenu()" aria-label="Close">Change Club</a>
+    <a class="button EA-Font-small" style="width:120px" onclick="showChangeTypeMenu()" aria-label="Close">Change Type</a>-->
+        <a class="button EA-Font-small" style="width:120px" onclick="listMode()" aria-label="Close">List Mode</a>
     </div>
     <div class="modal" id="addCard">
         <div class="modal-content" style="width:70%">
@@ -48,32 +49,32 @@
                                 </tr>
                                 <tr>
                                     <td>Position</td>
-                                    <td><input type="text" id="add-pos" onchange="updatePreview()"/></td>
+                                    <td><input type="text" id="add-pos" onchange="updatePreview()" /></td>
                                     <td>Rating</td>
-                                    <td><input type="text" id="add-rat" onchange="updatePreview()"/></td>
+                                    <td><input type="text" id="add-rat" onchange="updatePreview()" /></td>
                                 </tr>
                                 <tr>
                                     <td>Pace</td>
-                                    <td><input type="text" id="add-pac" onchange="updatePreview()"/></td>
+                                    <td><input type="text" id="add-pac" onchange="updatePreview()" /></td>
 
                                     <td>Dribling</td>
-                                    <td><input type="text" id="add-dri" onchange="updatePreview()"/></td>
+                                    <td><input type="text" id="add-dri" onchange="updatePreview()" /></td>
                                 </tr>
                                 <tr>
                                     <td>Shooting</td>
-                                    <td><input type="text" id="add-sho" onchange="updatePreview()"/></td>
+                                    <td><input type="text" id="add-sho" onchange="updatePreview()" /></td>
                                     <td>Defense</td>
-                                    <td><input type="text" id="add-def" onchange="updatePreview()"/></td>
+                                    <td><input type="text" id="add-def" onchange="updatePreview()" /></td>
                                 </tr>
                                 <tr>
                                     <td>Passing</td>
-                                    <td><input type="text" id="add-pas" onchange="updatePreview()"/></td>
+                                    <td><input type="text" id="add-pas" onchange="updatePreview()" /></td>
                                     <td>Physical</td>
-                                    <td><input type="text" id="add-phy" onchange="updatePreview()"/></td>
+                                    <td><input type="text" id="add-phy" onchange="updatePreview()" /></td>
                                 </tr>
                                 <tr>
                                     <td>Special Image</td>
-                                    <td><input type="text" id="add-imageurl" placeholder="ImageUrl" onchange="updatePreview()"/></td>
+                                    <td><input type="text" id="add-imageurl" placeholder="ImageUrl" onchange="updatePreview()" /></td>
                                 </tr>
                             </table>
                         </td>
@@ -150,7 +151,7 @@
                             </table>
                         </td>
                     </tr>
-                    
+
                 </table>
 
                 <input type="submit" value="Add" />
@@ -158,11 +159,11 @@
         </div>
     </div>
 
-    <div class="modal" id="changePlayer" style="display:none">
+    <div class="modal" id="changeClub" style="display:none">
         <div class="modal-content" style="width:70%">
-            <select id="selectplayer" class="btn btn-light dropdown-toggle"
+            <select id="select-change-clubs" class="btn btn-light dropdown-toggle"
                     style="width:60%"></select>
-            <a style="cursor:pointer" onclick="changePlayer()" aria-label="Close">OK</a>
+            <a style="cursor:pointer" onclick="changeClub()" aria-label="Close">OK</a>
             <a style="cursor:pointer" onclick="closeInput()" aria-label="Close">&#10006;</a>
         </div>
     </div>
@@ -195,34 +196,54 @@
                 <input type="hidden" id="edit-id" />
                 <table>
                     <tr>
-                        <td>Name</td>
-                        <td><input type="text" id="edit-name" placeholder="Name" /></td>
-                    </tr>
-                    <tr>
-                        <td>ImageUrl</td>
-                        <td><input type="text" id="edit-imageurl" placeholder="ImageUrl" /></td>
-                    </tr>
-                    <tr>
                         <td>Player</td>
                         <td><select id="edit-players"></select></td>
-                    </tr>
-                    <tr>
                         <td>Type</td>
                         <td><select id="edit-types"></select></td>
                     </tr>
+                    <tr>
+                        <td>Position</td>
+                        <td><input type="text" id="edit-pos"/></td>
+                        <td>Rating</td>
+                        <td><input type="text" id="edit-rat"/></td>
+                    </tr>
+                    <tr>
+                        <td>Pace</td>
+                        <td><input type="text" id="edit-pac"/></td>
+
+                        <td>Dribling</td>
+                        <td><input type="text" id="edit-dri"/></td>
+                    </tr>
+                    <tr>
+                        <td>Shooting</td>
+                        <td><input type="text" id="edit-sho"/></td>
+                        <td>Defense</td>
+                        <td><input type="text" id="edit-def"/></td>
+                    </tr>
+                    <tr>
+                        <td>Passing</td>
+                        <td><input type="text" id="edit-pas"/></td>
+                        <td>Physical</td>
+                        <td><input type="text" id="edit-phy" /></td>
+                    </tr>
+                    <tr>
+                        <td>Special Image</td>
+                        <td><input type="text" id="edit-imageurl" placeholder="ImageUrl" /></td>
+                    </tr>
                 </table>
                 <input type="submit" value="Save" />
+                <button id="deleteBut" class="btn-danger rounded">Delete</button>
             </form>
         </div>
     </div>
 
     <p id="counter"></p>
 
-    <table id="dataTable" class="table-data table-striped EA-Font-small"
+    <!--<table id="dataTable" class="table-data table-striped EA-Font-small"
            style="margin-top: 40px">
         <thead>
             <tr>
-                <th style="width:90px"></th>
+                <th style="width:300px" align="right">View</th>
                 <th align="left" style="width:400px">Card</th>
                 <th align="left" style="width:400px">Player</th>
                 <th align="left" style="width:400px">Type</th>
@@ -231,14 +252,16 @@
             </tr>
         </thead>
         <tbody id="cards"></tbody>
-    </table>
+    </table>-->
+
+    <div id="cards" align="center" <!--class="back-white"-->></div>
 
     <script src="js/cards.js" asp-append-version="true"></script>
     <script type="text/javascript">
         processUser();
+        getCards();
         getPlayers();
         getTypes();
-        getCards();
     </script>
 
 

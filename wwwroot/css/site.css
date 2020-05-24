@@ -91,3 +91,11 @@
     font-weight: bold;
     color:white;
 }
+
+.back-white {
+    background-image: url('../images/backgrounds/unnamed.png');
+    background-size: 100%;
+    background-color: white;
+    border-radius: 50px;
+    margin-bottom: 50px;
+}

@@ -125,6 +125,7 @@ function _displayClubs(data) {
         let detButton = button.cloneNode(false);
         detButton.innerText = 'Players';
         detButton.setAttribute('onclick', `ToPlayers(${club.id})`);
+        detButton.setAttribute('class', 'rounded');
 
         let editButton = button.cloneNode(false);
         editButton.innerText = 'Edit';

@@ -95,15 +95,17 @@ function _displayNations(data) {
 
         let detButton = button.cloneNode(false);
         detButton.innerText = 'Players';
+        detButton.setAttribute('class', `rounded`);
         detButton.setAttribute('onclick', `ToPlayers(${nation.id})`);
 
         let editButton = button.cloneNode(false);
         editButton.innerText = 'Edit';
         editButton.setAttribute('onclick', `displayEditForm(${nation.id})`);
-        //editButton.setAttribute('class', `btn-blue`);
+        editButton.setAttribute('class', `btn-primary rounded`);
 
         let deleteButton = button.cloneNode(false);
         deleteButton.innerText = 'Delete';
+        deleteButton.setAttribute('class', `btn-danger rounded`);
         deleteButton.setAttribute('onclick', `deleteNation(${nation.id})`);
 
         let tr = tBody.insertRow();
