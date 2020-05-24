@@ -113,7 +113,7 @@ function _displayNations(data) {
         let td1 = tr.insertCell(0);
         var img = document.createElement('img');
         img.src = "../images/nations/nation_large_" + nation.imageUrl + ".png";
-        img.width = 70;
+        img.width = 100;
         td1.appendChild(img);
 
         let td2 = tr.insertCell(1);

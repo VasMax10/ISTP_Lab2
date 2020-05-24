@@ -95,10 +95,12 @@ function _displayCardTypes(data) {
         let editButton = button.cloneNode(false);
         editButton.innerText = 'Edit';
         editButton.setAttribute('onclick', `displayEditForm(${cardType.id})`);
+        editButton.setAttribute('class', `btn-primary rounded`);
 
         let deleteButton = button.cloneNode(false);
         deleteButton.innerText = 'Delete';
         deleteButton.setAttribute('onclick', `deleteCardType(${cardType.id})`);
+        deleteButton.setAttribute('class', `btn-danger rounded`);
 
         let tr = tBody.insertRow();
         
