@@ -92,6 +92,11 @@ function _displayNations(data) {
     const button = document.createElement('button');
     
     data.forEach(nation => {
+
+        let detButton = button.cloneNode(false);
+        detButton.innerText = 'Players';
+        detButton.setAttribute('onclick', `ToPlayers(${nation.id})`);
+
         let editButton = button.cloneNode(false);
         editButton.innerText = 'Edit';
         editButton.setAttribute('onclick', `displayEditForm(${nation.id})`);
@@ -105,7 +110,7 @@ function _displayNations(data) {
         
         let td1 = tr.insertCell(0);
         var img = document.createElement('img');
-        img.src = "../images/nations/nation_large_" + nation.imageUrl + ".png"
+        img.src = "../images/nations/nation_large_" + nation.imageUrl + ".png";
         img.width = 70;
         td1.appendChild(img);
 
@@ -114,10 +119,13 @@ function _displayNations(data) {
         td2.appendChild(textNode);
 
         let td3 = tr.insertCell(2);
-        td3.appendChild(editButton);
+        td3.appendChild(detButton);
 
         let td4 = tr.insertCell(3);
-        td4.appendChild(deleteButton);
+        td4.appendChild(editButton);
+
+        let td5 = tr.insertCell(4);
+        td5.appendChild(deleteButton);
     });
 
     nations = data;
@@ -178,3 +186,9 @@ function showAddMenu() {
     document.getElementById('addNation').style.display = 'block';
     modal = document.getElementById("addNation");
 }
+
+function ToPlayers(id) {
+    const nation = nations.find(nation => nation.id === id);
+    window.location.href = `players.html?nation=${nation.name}`;
+}
+

@@ -1,0 +1,246 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Details</title>
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/boots/css/bootstrap.min.css">
+</head>
+<body class="back">
+    <nav class="navbar navbar-dark bg-primary" style="margin-left:-70px; margin-right:-70px">
+        <ul class="navbar-nav list-group-horizontal">
+            <li class="nav-item EA-Font-small" style="margin-left:15px; margin-right:40px; font-size: 25px;">
+                <a class="nav-link" href="index.html">FIFA DATABASE</a>
+            </li>
+            <li class="nav-item EA-Font-small" style="margin-left:15px; margin-right:15px">
+                <a class="nav-link" href="leagues.html">Leagues</a>
+            </li>
+            <li class="nav-item EA-Font-small" style="margin-left:15px; margin-right:15px">
+                <a class="nav-link" href="nations.html">Nations</a>
+            </li>
+            <li class="nav-item EA-Font-small" style="margin-left:15px; margin-right:15px">
+                <a class="nav-link" href="cardTypes.html">Card Types</a>
+            </li>
+        </ul>
+    </nav>
+    <br />
+
+    <div>
+        <a class="button EA-Font-small" style="width:100px" onclick="showAddMenu()" aria-label="Close">Add Card</a>
+        <a class="button EA-Font-small" style="width:120px" onclick="showImportMenu()" aria-label="Close">Import Data</a>
+        <a class="button EA-Font-small" style="width:120px" onclick="showChangePlayerMenu()" aria-label="Close">Change Player</a>
+        <a class="button EA-Font-small" style="width:120px" onclick="showChangeTypeMenu()" aria-label="Close">Change Type</a>
+    </div>
+    <div class="modal" id="addCard">
+        <div class="modal-content" style="width:70%">
+            <h3 align="center">Add card</h3>
+            <a style="cursor:pointer; margin-top:-50px; margin-left:98%" onclick="closeInput()" aria-label="Close">&#10006;</a>
+            <form style="margin-top:20px" action="javascript:void(0);" method="POST" onsubmit="addCard()">
+                <table>
+                    <tr>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td>Player</td>
+                                    <td><select id="players" onchange="updatePreview()"></select></td>
+                                    <td>Type</td>
+                                    <td><select id="add-types" onchange="updatePreview()"></select></td>
+                                </tr>
+                                <tr>
+                                    <td>Position</td>
+                                    <td><input type="text" id="add-pos" onchange="updatePreview()"/></td>
+                                    <td>Rating</td>
+                                    <td><input type="text" id="add-rat" onchange="updatePreview()"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Pace</td>
+                                    <td><input type="text" id="add-pac" onchange="updatePreview()"/></td>
+
+                                    <td>Dribling</td>
+                                    <td><input type="text" id="add-dri" onchange="updatePreview()"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Shooting</td>
+                                    <td><input type="text" id="add-sho" onchange="updatePreview()"/></td>
+                                    <td>Defense</td>
+                                    <td><input type="text" id="add-def" onchange="updatePreview()"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Passing</td>
+                                    <td><input type="text" id="add-pas" onchange="updatePreview()"/></td>
+                                    <td>Physical</td>
+                                    <td><input type="text" id="add-phy" onchange="updatePreview()"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Special Image</td>
+                                    <td><input type="text" id="add-imageurl" placeholder="ImageUrl" onchange="updatePreview()"/></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td width="300" style="justify-content:end">
+                            <table id="preview" align="center" class="foot-card-text">
+                                <tr>
+                                    <td>
+                                        <img id="prev-card" width="250" src="images/cardTypes/legend_big.png" />
+                                    </td>
+                                    <td>
+                                        <a style="margin-left:-170px">
+                                            <img id="prev-image" style="margin-top:-130px" src="https://www.easports.com/fifa/ultimate-team/web-app/content/7D49A6B1-760B-4491-B10C-167FBC81D58A/2019/fut/items/images/mobile/portraits/239420.png" />
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <div id="prev-rat" align="center"
+                                             style="margin-top:-170px; margin-left:-235px; width:75px; font-size:50px">
+                                            93
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="prev-pos" align="center"
+                                             style="margin-top:-115px; margin-left:-235px; width:70px">
+                                            ST
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <a style="margin-left:-225px">
+                                            <img id="prev-nation" style="margin-top:-120px" width="45" src="images/nations/nation_large_49.png" />
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a style="margin-left:-222px">
+                                            <img id="prev-club" style="margin-top:-30px" width="40" src="images/clubs/club_large_112658.png" />
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <div id="prev-name" align="center"
+                                             style="margin-top:70px; margin-left:-250px; width:245px">
+                                            SHEVCHENKO
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div align="center"
+                                             style="margin-top:210px; margin-left:-260px;
+                        width:240px">
+                                            <table style="font-size:23px">
+                                                <tr>
+                                                    <td id="prev-pac">91&nbsp;&nbsp;</td>
+                                                    <td>PAC</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td id="prev-dri">90&nbsp;&nbsp;</td>
+                                                    <td>DRI</td>
+                                                </tr>
+                                                <tr>
+                                                    <td id="prev-sho">95</td>
+                                                    <td>SHO</td>
+                                                    <td>    </td>
+                                                    <td id="prev-def">36</td>
+                                                    <td>DEF</td>
+                                                </tr>
+                                                <tr>
+                                                    <td id="prev-pas">75</td>
+                                                    <td>PAS</td>
+                                                    <td>    </td>
+                                                    <td id="prev-phy">80</td>
+                                                    <td>PHY</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    
+                </table>
+
+                <input type="submit" value="Add" />
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="changePlayer" style="display:none">
+        <div class="modal-content" style="width:70%">
+            <select id="selectplayer" class="btn btn-light dropdown-toggle"
+                    style="width:60%"></select>
+            <a style="cursor:pointer" onclick="changePlayer()" aria-label="Close">OK</a>
+            <a style="cursor:pointer" onclick="closeInput()" aria-label="Close">&#10006;</a>
+        </div>
+    </div>
+
+    <div class="modal" id="changeType" style="display:none">
+        <div class="modal-content" style="width:70%">
+            <select id="selecttype" class="btn btn-light dropdown-toggle"
+                    style="width:60%"></select>
+            <a style="cursor:pointer" onclick="changeType()" aria-label="Close">OK</a>
+            <a style="cursor:pointer" onclick="closeInput()" aria-label="Close">&#10006;</a>
+        </div>
+    </div>
+
+    <div class="modal" id="importCards" style="display:none">
+        <div class="modal-content" style="width:70%">
+            <h3>Import Data</h3>
+            <form action="javascript:void(0);" method="POST" onsubmit="importCards()">
+                <input type="file" id="dataFile" accept=".xlsx, .txt" />
+                <input type="submit" value="Import" />
+                <a style="cursor:pointer" onclick="closeInput()" aria-label="Close">&#10006;</a>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="editCard" style="display:none">
+        <div class="modal-content" style="width:70%">
+            <h3 align="center">Change Card Info</h3>
+            <a style="cursor:pointer; margin-top:-50px; margin-left:98%" onclick="closeInput()" aria-label="Close">&#10006;</a>
+            <form style="margin-top:20px" action="javascript:void(0);" onsubmit="updateCard()">
+                <input type="hidden" id="edit-id" />
+                <table>
+                    <tr>
+                        <td>Name</td>
+                        <td><input type="text" id="edit-name" placeholder="Name" /></td>
+                    </tr>
+                    <tr>
+                        <td>ImageUrl</td>
+                        <td><input type="text" id="edit-imageurl" placeholder="ImageUrl" /></td>
+                    </tr>
+                    <tr>
+                        <td>Player</td>
+                        <td><select id="edit-players"></select></td>
+                    </tr>
+                    <tr>
+                        <td>Type</td>
+                        <td><select id="edit-types"></select></td>
+                    </tr>
+                </table>
+                <input type="submit" value="Save" />
+            </form>
+        </div>
+    </div>
+
+    <p id="counter"></p>
+
+    <table id="dataTable" class="table-data table-striped EA-Font-small"
+           style="margin-top: 40px">
+        <thead>
+            <tr>
+                <th style="width:90px"></th>
+                <th align="left" style="width:400px">Card</th>
+                <th align="left" style="width:400px">Player</th>
+                <th align="left" style="width:400px">Type</th>
+                <th align="right" style="width:20px"></th>
+                <th align="right" style="width:20px"></th>
+            </tr>
+        </thead>
+        <tbody id="cards"></tbody>
+    </table>
+
+    <script src="js/cards.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        processUser();
+        getPlayers();
+        getTypes();
+        getCards();
+    </script>
+
+
+</body>
+</html>

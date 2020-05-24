@@ -23,41 +23,42 @@ namespace ISTP_Lab2.Controllers
         {
             public string ClubName { get; set; }
             public string NationName { get; set; }
-            public UserPlayer(Player player, string ClubName, string NationName)
+            public string ClubImage { get; set; }
+            public string NationImage { get; set; }
+            public UserPlayer(Player player, string ClubName, string NationName, string ClubImage, string NationImage)
             {
                 ID = player.ID;
                 ImageUrl = player.ImageUrl;
                 Name = player.Name;
                 this.ClubName = ClubName;
                 this.NationName = NationName;
+                this.ClubImage = ClubImage;
+                this.NationImage = NationImage;
             }
         }
         // GET: api/Players
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserPlayer>>> GetPlayers(string clubName, string nationName)
-        {
-            //return await _context.Players.ToListAsync();
-            var list = _context.Players.Select(c => new UserPlayer(c, c.Club.Name, c.Nation.Name));
-            if (clubName != null)
+        { 
+            if (clubName != null && nationName != null)
             {
-                //list = list.Where(l => l.ClubName == clubName);
-                list = list.Where(l => l.Club.Name == clubName);
+                var sel_list = _context.Players.Where(l => l.Club.Name == clubName && l.Nation.Name == nationName)
+                                       .Select(c => new UserPlayer(c, c.Club.Name, c.Nation.Name, c.Club.ImageUrl, c.Nation.ImageUrl));
+                return await sel_list.ToListAsync();
+            } 
+            else if (nationName != null)
+            {
+                var sel_list = _context.Players.Where(l => l.Nation.Name == nationName)
+                                       .Select(c => new UserPlayer(c, c.Club.Name, c.Nation.Name, c.Club.ImageUrl, c.Nation.ImageUrl));
+                return await sel_list.ToListAsync();
             }
-            if (nationName != null)
+            else if (clubName != null)
             {
-                list = list.Where(l => l.Nation.Name == nationName);
-
+                var sel_list = _context.Players.Where(l => l.Club.Name == clubName)
+                                       .Select(c => new UserPlayer(c, c.Club.Name, c.Nation.Name, c.Club.ImageUrl, c.Nation.ImageUrl));
+                return await sel_list.ToListAsync();
             }
-
-            var list2 = _context.Players.Select(c => new UserPlayer(c, c.Club.Name, c.Nation.Name));
-            
-            /*if (leagueName != null)
-            {
-                var list2 = _context.Clubs.Where(c => c.League.Name == leagueName)
-                    .Select(c => new UserClub(c, c.League.Name));
-                return await list2.ToListAsync();
-            }*/
-            return await list.ToListAsync();
+            return await _context.Players.Select(c => new UserPlayer(c, c.Club.Name, c.Nation.Name, c.Club.ImageUrl, c.Nation.ImageUrl)).ToListAsync();
         }
 
         // GET: api/Players/5

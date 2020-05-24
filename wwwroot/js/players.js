@@ -4,7 +4,7 @@ let clubs = [];
 let nations = [];
 var modal = document.getElementById("editPlayer");
 let cur_club = '';
-let cur_nation = 'Spain';
+let cur_nation = '';
 
 
 function getPlayers() {
@@ -235,12 +235,24 @@ function changeClub() {
     closeInput();
 }
 
+function showChangeNationMenu() {
+    document.getElementById('changeNation').style.display = 'block';
+    modal = document.getElementById("changeNation");
+}
+function changeNation() {
+    cur_nation = document.getElementById("selectnation").value;
+    getPlayers();
+    closeInput();
+}
+
 function processUser() {
     var parameters = location.search.substring(1).split("&");
 
     var temp = parameters[0].split("=");
     if (temp[0] == 'club')
         cur_club = temp[1];
+    if (temp[0] == 'nation')
+        cur_nation = temp[1];
     //var temp2 = parameters[1].split("=");
     //if (temp2[0] == 'nation')
         //cur_club = temp2[1];
@@ -255,6 +267,7 @@ function getNations() {
 function _displayNations(data) {
     var combo = document.getElementById("add-nations");
     var comboEdit = document.getElementById("edit-nations");
+    var comboChange = document.getElementById("selectnation");
     data.forEach(nation => {
         var opt = document.createElement('option');
         opt.appendChild(document.createTextNode(nation.name));
@@ -263,6 +276,10 @@ function _displayNations(data) {
         var opt2 = document.createElement('option');
         opt2.appendChild(document.createTextNode(nation.name));
         comboEdit.appendChild(opt2);
+
+        var opt3 = document.createElement('option');
+        opt3.appendChild(document.createTextNode(nation.name));
+        comboChange.appendChild(opt2);
     });
 
     nations = data;

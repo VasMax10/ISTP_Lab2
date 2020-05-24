@@ -30,6 +30,7 @@
         <a class="button EA-Font-small" style="width:100px" onclick="showAddMenu()" aria-label="Close">Add Player</a>
         <a class="button EA-Font-small" style="width:120px" onclick="showImportMenu()" aria-label="Close">Import Data</a>
         <a class="button EA-Font-small" style="width:120px" onclick="showChangeClubMenu()" aria-label="Close">Change Club</a>
+        <a class="button EA-Font-small" style="width:120px" onclick="showChangeNationMenu()" aria-label="Close">Change Nation</a>
     </div>
     <div class="modal" id="addPlayer">
         <div class="modal-content" style="width:70%">
@@ -64,6 +65,15 @@
             <select id="selectclub" class="btn btn-light dropdown-toggle"
                     style="width:60%"></select>
             <a style="cursor:pointer" onclick="changeClub()" aria-label="Close">OK</a>
+            <a style="cursor:pointer" onclick="closeInput()" aria-label="Close">&#10006;</a>
+        </div>
+    </div>
+
+    <div class="modal" id="changeNation" style="display:none">
+        <div class="modal-content" style="width:70%">
+            <select id="selectnation" class="btn btn-light dropdown-toggle"
+                    style="width:60%"></select>
+            <a style="cursor:pointer" onclick="changeNation()" aria-label="Close">OK</a>
             <a style="cursor:pointer" onclick="closeInput()" aria-label="Close">&#10006;</a>
         </div>
     </div>
@@ -109,6 +119,7 @@
     </div>
 
     <p id="counter"></p>
+
     <table id="dataTable" class="table-data table-striped EA-Font-small"
            style="margin-top: 40px">
         <thead>
@@ -123,9 +134,7 @@
         </thead>
         <tbody id="players"></tbody>
     </table>
-
-
-
+    
     <script src="js/players.js" asp-append-version="true"></script>
     <script type="text/javascript">
         processUser();

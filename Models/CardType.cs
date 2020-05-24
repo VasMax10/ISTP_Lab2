@@ -16,6 +16,7 @@ namespace ISTP_Lab2.Models
         [Required(ErrorMessage = "This field is required")]
         public string Name { get; set; }
         public string ImageUrl { get; set; }
+        public int darkStyle { get; set; }
         public virtual ICollection<Card> Cards { get; set; }
     }
 }

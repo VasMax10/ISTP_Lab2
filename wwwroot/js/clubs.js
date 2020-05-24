@@ -121,6 +121,11 @@ function _displayClubs(data) {
     const button = document.createElement('button');
 
     data.forEach(club => {
+
+        let detButton = button.cloneNode(false);
+        detButton.innerText = 'Players';
+        detButton.setAttribute('onclick', `ToPlayers(${club.id})`);
+
         let editButton = button.cloneNode(false);
         editButton.innerText = 'Edit';
         editButton.setAttribute('class', 'btn-primary rounded');
@@ -148,10 +153,13 @@ function _displayClubs(data) {
         td3.appendChild(textNodeLeague);
 
         let td4 = tr.insertCell(3);
-        td4.appendChild(editButton);
+        td4.appendChild(detButton);
 
         let td5 = tr.insertCell(4);
-        td5.appendChild(deleteButton);
+        td5.appendChild(editButton);
+
+        let td6 = tr.insertCell(5);
+        td6.appendChild(deleteButton);
     });
 
     clubs = data;
@@ -229,4 +237,9 @@ function processUser() {
     if (temp[0] == 'league')
         cur_league = temp[1];
     parameters = '';
+}
+
+function ToPlayers(id) {
+    const club = clubs.find(club => club.id === id);
+    window.location.href = `players.html?club=${club.name}`;
 }
